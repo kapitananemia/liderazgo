@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liderazgo en Escena - Habla como un líder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                50: '#eef6ff',
+                100: '#d9ebff',
+                200: '#bcdbff',
+                300: '#8ec4ff',
+                400: '#58a4ff',
+                500: '#3181ff',
+                600: '#1b61f5',
+                700: '#144ddec',
+                800: '#173fb3',
+                900: '#00509d', // The Blue from the logo
+                950: '#0a235b',
+              },
+            },
+            fontFamily: {
+              sans: ['Plus Jakarta Sans', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+        .bg-spotlight {
+            background: radial-gradient(circle at 50% 0%, rgba(0, 80, 157, 0.08) 0%, transparent 75%);
+        }
+        .text-balance {
+            text-wrap: balance;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
