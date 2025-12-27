@@ -55,7 +55,7 @@ const ThankYouPage = ({ onBack }: { onBack: () => void }) => {
       </h1>
       <p className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-12 font-medium leading-relaxed">
         Tu plaza para <span className="text-brand-900 font-bold">Liderazgo en Escena</span> está un paso más cerca. 
-        Revisa tu WhatsApp y Email; Mariana o alguien del equipo te contactará en menos de <span className="text-gray-900 font-bold underline">24h laborables</span> para agendar tu entrevista.
+        Revisa tu WhatsApp y Email; el equipo te contactará en menos de <span className="text-gray-900 font-bold underline">24h laborables</span> para agendar tu entrevista.
       </p>
       
       <div className="grid md:grid-cols-3 gap-6 max-w-4xl w-full mb-16">
@@ -105,7 +105,6 @@ const App: React.FC = () => {
     const data = Object.fromEntries(formData.entries());
 
     try {
-      // Usamos el ID de Formspree del usuario
       const response = await fetch(`https://formspree.io/f/mzdbbwvl`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
@@ -124,7 +123,6 @@ const App: React.FC = () => {
     }
   };
 
-  // Si el formulario se ha enviado, mostramos la página de GRACIAS
   if (isFormSubmitted) {
     return <ThankYouPage onBack={() => setIsFormSubmitted(false)} />;
   }
@@ -167,49 +165,59 @@ const App: React.FC = () => {
     { week: 8, title: "Noche con público #2 (Showcase)", description: "6 min por persona + cierre + networking." }
   ];
 
-  const pricingTiers: PricingTier[] = [
+  // Actualizados con los datos de lanzamiento solicitados
+  const pricingTiers = [
     {
-      name: "Básico",
-      price: "890 €",
+      name: "Founder",
+      price: "690 €",
       reservation: "200 €",
+      weekly: "86 €",
+      capacity: "5 plazas",
       features: [
-        "Todo el programa (8 semanas)",
-        "2 noches con público invitado",
-        "Grabación final editada",
-        "Material de soporte",
+        "Programa completo (8 semanas)",
+        "2 noches con público (sem. 4 y 8)",
+        "Grabación final (12-14 min)",
+        "Teaser 3 min + Feedback",
+        "Prioridad de escenario (sales antes y más veces)",
+        "Grupo privado Founder (acceso directo)",
         "IVA incluido"
       ]
     },
     {
-      name: "Pro (Recomendado)",
-      price: "1.190 €",
+      name: "Standard",
+      price: "790 €",
       reservation: "250 €",
+      weekly: "99 €",
+      capacity: "10 plazas",
       recommended: true,
       features: [
-        "Todo lo del Básico",
-        "2 Sesiones 1:1 con dirección",
-        "Revisión de guion personalizada",
-        "Kit de candidatura TEDx",
-        "Acceso prioritario a eventos"
+        "Programa completo 8 semanas",
+        "2 noches con público real (sem. 4 y 8)",
+        "Grabación final + teaser 3 min",
+        "Feedback exigente y directo",
+        "Certificado de finalización",
+        "IVA incluido"
       ]
     },
     {
-      name: "Empresa",
-      price: "1.490 €",
+      name: "Pro VIP",
+      price: "990 €",
       reservation: "300 €",
+      weekly: "124 €",
       features: [
-        "Facturación corporativa",
-        "Informe de progreso individual",
-        "Sesión de feedback post-programa",
-        "Derechos comerciales del vídeo",
-        "Soporte premium"
+        "Todo lo del plan Standard",
+        "2 sesiones 1:1 (30 min)",
+        "Revisión personalizada de guion",
+        "Ensayo privado exclusivo",
+        "Kit de candidatura TEDx",
+        "IVA incluido"
       ]
     }
   ];
 
   const faqs: FAQItem[] = [
     { question: "¿Es un TED o TEDx oficial?", answer: "No. Es un programa de formación con formato 'estilo TED'. Ayudamos con el material si quieres postularte a convocatorias oficiales." },
-    { question: "¿Tengo que tener experiencia?", answer: "No. Pero sí ganas de practicar y exponerte. La formación es progresiva." },
+    { question: "¿Tengo que tener experiencia?", answer: "No. Pero sí ganas de practicar and exponerte. La formación es progresiva." },
     { question: "¿Se graba con calidad?", answer: "Sí: el objetivo es que te lleves un vídeo final digno para usar profesionalmente." },
     { question: "¿Qué pasa si falto a una sesión?", answer: "Te damos tarea y guía de recuperación, pero el progreso depende de la práctica presencial." }
   ];
@@ -238,8 +246,12 @@ const App: React.FC = () => {
             <h1 className="text-5xl md:text-8xl font-extrabold text-gray-900 leading-[1.1] mb-8 tracking-tight text-balance">
               Habla como un líder. <br/> <span className="text-brand-900">Con público real. En 8 semanas.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
+            <p className="text-xl md:text-2xl text-gray-600 mb-6 max-w-3xl mx-auto">
               Un programa presencial en Madrid para convertir tu mensaje en una charla de liderazgo estilo TED (12–14 min), con escenario y público invitado.
+            </p>
+            {/* Línea de logística explícita solicitada */}
+            <p className="text-lg font-bold text-brand-900 mb-10 tracking-wide uppercase text-sm md:text-base">
+              8 semanas · 1 sesión/semana (19:00) · Madrid centro · 15 plazas · 2 noches con público
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <button onClick={() => scrollTo('form')} className="w-full sm:w-auto px-10 py-5 bg-brand-900 text-white rounded-2xl font-bold text-lg hover:bg-black transition-all shadow-xl flex items-center justify-center gap-3">
@@ -254,19 +266,18 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Metrics */}
+      {/* Metrics Actualizadas */}
       <section className="py-12 bg-gray-900 text-white">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto text-center">
-            <div><div className="text-3xl font-black text-brand-400">+2.000</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">Comunidad</div></div>
-            <div><div className="text-3xl font-black text-brand-400">300</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">En WhatsApp</div></div>
-            <div><div className="text-3xl font-black text-brand-400">Mensuales</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">Eventos presenciales</div></div>
-            <div><div className="text-3xl font-black text-brand-400">15</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">Alumnos por cohorte</div></div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto text-center">
+            <div><div className="text-3xl font-black text-brand-400">2.077</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">En comunidad</div></div>
+            <div><div className="text-3xl font-black text-brand-400">28</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">Eventos/año</div></div>
+            <div><div className="text-3xl font-black text-brand-400">15</div><div className="text-gray-400 text-xs uppercase tracking-widest mt-1">Plazas por cohorte</div></div>
           </div>
         </div>
       </section>
 
-      {/* Filosofía (Matching Image) */}
+      {/* Filosofía */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="container mx-auto px-6">
           <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
@@ -323,7 +334,7 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Programa por semanas */}
+      {/* Programa */}
       <section className="py-24 bg-white" id="temario">
         <div className="container mx-auto px-6">
           <SectionHeader title="Programa por semanas" subtitle="8 semanas de inmersión total en escenario." />
@@ -355,23 +366,94 @@ const App: React.FC = () => {
         </div>
       </section>
 
-      {/* Pricing */}
-      <section className="py-24 bg-white" id="precios">
+      {/* BLOQUE DE PRECIO - FASE DE LANZAMIENTO */}
+      <section className="py-24 bg-white border-t border-gray-100" id="precios">
         <div className="container mx-auto px-6">
-          <SectionHeader title="Plazas y Admisión" subtitle="Solo 15 plazas para garantizar feedback serio." />
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1.5 bg-brand-900 text-white text-xs font-black uppercase tracking-[0.2em] rounded-full mb-6">
+              ## FASE DE LANZAMIENTO
+            </span>
+            <h2 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight text-gray-900">
+              Cohorte Fundadora <span className="text-brand-900">(15 plazas)</span>
+            </h2>
+            <div className="max-w-2xl mx-auto space-y-2">
+              <p className="text-xl text-gray-400 line-through font-bold">Precio 2ª edición: 1.190€ (IVA incl.)</p>
+              <p className="text-brand-900 font-bold text-lg italic">
+                Precio fundador solo disponible en esta cohorte + condiciones especiales de admisión.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto items-stretch">
             {pricingTiers.map((tier, i) => (
-              <div key={i} className={`p-10 rounded-[3rem] border flex flex-col ${tier.recommended ? 'border-brand-900 bg-white shadow-2xl scale-105 z-10' : 'border-gray-100 bg-gray-50'}`}>
-                <h4 className="text-2xl font-black mb-2">{tier.name}</h4>
-                <div className="text-5xl font-black text-gray-900 mb-6">{tier.price}</div>
-                <ul className="space-y-4 mb-10 flex-grow">
-                  {tier.features.map((f, j) => (
-                    <li key={j} className="flex gap-2 text-sm text-gray-600"><CheckCircle2 className="w-4 h-4 text-brand-900 flex-shrink-0" /> {f}</li>
-                  ))}
-                </ul>
-                <button onClick={() => scrollTo('form')} className={`w-full py-4 rounded-2xl font-bold text-lg transition-all ${tier.recommended ? 'bg-brand-900 text-white hover:bg-black' : 'bg-white text-gray-900 border-2 border-gray-200 hover:border-brand-900'}`}>Solicitar plaza</button>
+              <div key={i} className={`relative p-10 rounded-[3rem] border flex flex-col transition-all duration-500 hover:shadow-2xl ${tier.recommended ? 'border-brand-900 bg-white shadow-xl scale-105 z-10' : 'border-gray-100 bg-gray-50 shadow-sm'}`}>
+                {tier.recommended && (
+                  <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-brand-900 text-white px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest">Más elegido</span>
+                )}
+                <div className="mb-8">
+                  <h4 className="text-2xl font-black mb-1">{tier.name}</h4>
+                  {tier.capacity && <p className="text-brand-900 font-bold text-xs uppercase tracking-widest mb-4">{tier.capacity}</p>}
+                  <div className="flex items-baseline gap-2 mb-1">
+                    <span className="text-5xl font-black text-gray-900">{tier.price}</span>
+                  </div>
+                  <div className="text-brand-600 font-bold text-sm uppercase tracking-widest">Desde {tier.weekly}/semana</div>
+                  <div className="text-xs text-gray-400 mt-1 italic font-medium">Factura a empresa disponible</div>
+                </div>
+
+                <div className="bg-gray-100/50 p-6 rounded-2xl mb-8 border border-gray-200/50">
+                  <div className="text-[10px] font-black uppercase tracking-widest text-gray-400 mb-3">
+                    {tier.name === "Pro VIP" ? "Núcleo Común" : "Características"}
+                  </div>
+                  <ul className="grid grid-cols-1 gap-2 text-[11px] font-bold text-gray-600">
+                    {tier.name !== "Pro VIP" ? (
+                      tier.features.map((f, j) => (
+                        <li key={j} className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-brand-900" /> {f}</li>
+                      ))
+                    ) : (
+                      <>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-brand-900" /> Programa 8 semanas</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-brand-900" /> 2 noches con público (sem 4 y 8)</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-brand-900" /> Grabación final (12–14 min)</li>
+                        <li className="flex items-center gap-2"><CheckCircle2 className="w-3 h-3 text-brand-900" /> Teaser 3 min + Feedback</li>
+                      </>
+                    )}
+                  </ul>
+                </div>
+
+                <div className="flex-grow">
+                   {tier.name === "Pro VIP" && (
+                     <>
+                        <div className="text-[10px] font-black uppercase tracking-widest text-brand-900 mb-3">Extras del plan</div>
+                        <ul className="space-y-4 mb-10">
+                          {tier.features.filter(f => !["Programa 8 semanas", "2 noches con público", "Grabación final", "Teaser 3 min", "Feedback exigente", "IVA incluido"].some(common => f.includes(common))).map((f, j) => (
+                            <li key={j} className="flex gap-2 text-sm font-semibold text-gray-700 leading-tight italic">
+                              <Star className="w-4 h-4 text-brand-900 flex-shrink-0" /> {f}
+                            </li>
+                          ))}
+                        </ul>
+                     </>
+                   )}
+                </div>
+
+                <div className="mt-auto space-y-4">
+                  <div className="text-center">
+                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Reserva: {tier.reservation}</p>
+                    <p className="text-[10px] text-brand-900 font-bold italic leading-none px-4">
+                      ✅ La reserva se paga después de la entrevista (si te aceptamos)
+                    </p>
+                  </div>
+                  <button onClick={() => scrollTo('form')} className={`w-full py-5 rounded-2xl font-black text-lg transition-all ${tier.recommended ? 'bg-brand-900 text-white hover:bg-black' : 'bg-white text-gray-900 border-2 border-gray-200 hover:border-brand-900'}`}>
+                    Solicitar plaza
+                  </button>
+                </div>
               </div>
             ))}
+          </div>
+          
+          <div className="mt-16 text-center max-w-2xl mx-auto bg-brand-50 p-6 rounded-3xl border border-brand-100">
+            <p className="text-brand-900 font-bold italic">
+              "No es barato. Es razonable para un activo de marca personal de por vida."
+            </p>
           </div>
         </div>
       </section>
